@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>收容社区</title>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.4.6.0.css">
+    <link rel="stylesheet" href="/css/amazeui.min.css">
+    <link rel="stylesheet" href="/css/amazeui.cropper.css">
+    <link rel="stylesheet" href="/css/custom_up_img.css">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/pet.css" rel="stylesheet">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+
+    <style type="text/css">
+        .up-img-cover {
+            width: 100px;
+            height: 100px;
+        }
+
+        .up-img-cover img {
+            width: 100%;
+        }
+    </style>
+
+    <style type="text/css">
+
+        #box-1{
+            width: 200px;
+            height: 200px;
+            border: 1px solid gray;
+            border-radius: 50%;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        $(function(){
+            //在input file内容改变的时候触发事件
+            $('#choose-file').change(function(){
+                //获取input file的files文件数组;
+                //$('#filed')获取的是jQuery对象，.get(0)转为原生对象;
+                //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+                var file = $('#choose-file').get(0).files[0];
+                //创建用来读取此文件的对象
+                var reader = new FileReader();
+                //使用该对象读取file文件
+                reader.readAsDataURL(file);
+                //读取文件成功后执行的方法函数
+                reader.onload=function(e){
+                    //读取成功后返回的一个参数e，整个的一个进度事件
+                    console.log(e);
+                    //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+                    //的base64编码格式的地址
+                    $('#show-img').get(0).src = e.target.result;
+                }
+            });
+
+            //隐藏input file控件
+            $("#choose-file").hide();
+
+            $("#box-1").bind('click',function(){
+                //当点击头像框时，就会弹出文件选择对话框
+                $("#choose-file").click();
+
+            });
+
+        });
+
+
+    </script>
+
+
+</head>
+<body background="/img/background.jpg">
+<!--导入模板 -->
+<div th:insert="~{navgation :: copy}"></div>
+
+<div class="container-fluid main">
+    <div class="row">
+
+<!--            左边-->
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+
+            <h2><span class="glyphicon glyphicon-object-align-right persontitle" aria-hidden="true"
+                      style="color: #777;"></span> 个人信息中心</h2>
+            <hr>
+
+            <div id="box-1" style="margin-left: 53px;">
+                <img id="show-img" th:src="${avatar}" alt=""/>
+            </div>
+
+            <div id="box-2">
+                <form action="/useravatar" method="post" enctype="multipart/form-data">
+                    <input id="choose-file" type="file" name="file" accept="image/*"/>
+                    <input name="id" th:value="${id}" type="hidden">
+                   <button class="btn btn-info" style="margin-left: 110px; margin-top: 40px;">确认修改</button>
+                </form>
+            </div>
+
+        </div>
+
+<!--            右边-->
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 89px;">
+            <div>
+               <form method="post" action="/personinfomation">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" id="name" th:value="${name}"
+                               style="max-width:624px;" name="name" >
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control"  th:value="${email}"
+                               style="max-width:624px;" name="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+
+                        <textarea name="bio" class="form-control" style="max-width:624px;" th:text="${bio}" id="bio"
+                                  cols="30"
+                                  rows="10"></textarea>
+                    </div>
+
+                    <input type="hidden" name="avatar" th:value="${save}">
+                    <button type="submit" class="btn btn-info"
+                            style=" margin-bottom: 17px; margin-left: 570px; margin-top: 10px;">修改
+                    </button>
+               </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

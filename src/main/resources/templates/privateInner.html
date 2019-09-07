@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="privateContent">
+<table width="100%" border="0">
+    <tr>
+        <div class="panel panel-default" style="height: 300px;">
+            <div class="panel-body" th:each="personinfo : ${personInfoList}">
+                <div>
+                    <span th:text="${personinfo.sendName}"></span> ：
+                    <span th:text="${personinfo.content}"></span>
+                </div>
+                <input type="hidden" th:value="${personinfo.sendId}" name="sendId">
+                <input type="hidden" th:value="${personinfo.receviceId}" name="receviceId">
+            </div>
+        </div>
+    </tr>
+    <tr>
+
+            <div class=" input-group" style="margin-bottom: 26px;">
+                <input type="text" class="form-control" placeholder="想说什么好呢...？" id="content" name="content">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" >Go!</button>
+                </span>
+            </div>
+
+    </tr>
+</table>
+</form>
+</body>
+</html>

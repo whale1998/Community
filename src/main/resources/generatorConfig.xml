@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+           <!-- 插件，分页功能-->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+        <!-- 数据库信息 -->
+        <jdbcConnection driverClass="org.h2.Driver"
+                        connectionURL="jdbc:h2:~/pet"
+                        userId="pet"
+                        password="123">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 生成实体类（Entity、model）的包名和位置 -->
+        <javaModelGenerator targetPackage="test.myfisttest.fristtest.Entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 生成DAO/mapper的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="test.myfisttest.fristtest.Mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 要生成哪些表-->
+        <table  tableName="user" domainObjectName="User" ></table>
+        <table  tableName="question" domainObjectName="Question" ></table>
+        <table  tableName="comment" domainObjectName="Comment" ></table>
+        <table  tableName="notification" domainObjectName="Notification" ></table>
+        <table  tableName="privateletter" domainObjectName="Privateletter" ></table>
+    </context>
+</generatorConfiguration>
