@@ -48,6 +48,11 @@ public class QuestionController {
             }
         }
 
+//        管理员ID
+        if(id==666){
+            model.addAttribute("root","root");
+        }
+
         model.addAttribute("question",questionuserDTO);
         model.addAttribute("comments",coments);
         model.addAttribute("tags",showtags);

@@ -63,7 +63,6 @@ public class AuthorizeController {
         String token = githubutil.getAccessToken(accessTokenDTO);
         //拿到Token去获取用户信息
         GithubUser githubUser = githubutil.getuser(token);
-        System.out.println(githubUser.getName());
 
         //此时要注意  return "redirect:/" 的时候，redirect 此种方式 要补全地址，不会被视图解析器加上前后缀
 
@@ -76,6 +75,7 @@ public class AuthorizeController {
             String mytoken= UUID.randomUUID().toString();
             user.setToken(mytoken);
             user.setAvatarUrl(githubUser.getAvatar_url());
+            user.setState(1);
             userService.createOrUpdata(user);
             //登陆成功 将生成的token写入 cookie中
             Cookie cook = new Cookie("cookie",mytoken);
@@ -101,12 +101,13 @@ public class AuthorizeController {
         return "redirect:/index";
     }
 
-//    普通用户登陆
+//    通过账号密码用户登陆
     @PostMapping("/userlogin")
     public String userlogin(@RequestParam("email") String email,
                             @RequestParam("password") String pwd,
                             HttpServletResponse response,
                             Model model){
+//        普通用户登陆
         UserExample user = new UserExample();
         user.createCriteria()
                 .andEmailEqualTo(email)

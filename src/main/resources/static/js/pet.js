@@ -48,6 +48,8 @@ function post() {
     transformjson(questionid, 1, content);
 }
 
+
+
 /*
 * 二级评论回复功能
 * */
@@ -150,7 +152,8 @@ function changecolor() {
     var yeses = $("#likecount").val();
     var id = $("#commentid").val();
     if (id != null && id != 0) {
-        $.post("/likecount", {yeses: yeses, id: id}, function (data) {
+        $.post(
+            "/likecount", {yeses: yeses, id: id}, function (data) {
             //收到数据
             var d = eval("(" + data + ")");
             // console.log(d);
@@ -158,38 +161,72 @@ function changecolor() {
             $("#commentLikeCount").append(data);
         })
     }
-
 }
 
-//私聊功能
-function chooseperson() {
-    var sendId = $("#personList").val();
-    debugger;
-    if (sendId != null) {
-        //html是前端传来的值 post(url,args,function())
-        window.location.href = "/privateLetter?sendId=" + sendId;
-        // $.ajax({
-        //     type : "post",
-        //     url : "/profile",
-        //     contentType: "application/json",
-        //     data : JSON.stringify({
-        //         "sendId": sendId
-        //     }),
-        //     dataType: "json",
-        //     success : function (data,testStatus) {
-        //         alert(data + testStatus);
-        //     },
-        //     error : function(errorMessage,e){
-        //         alert(e);
-        //     }
-        // });
-        // debugger;
-        // $.post("personletter","sendId="+sendId,function (data) {
-        //     //服务器会返回一个inner的内嵌页面给ajax,返回的新页面替代掉原来的老页面
-        //     //通过标签选择器，选择这个include所包含的所有html元素，把前端传来的值全部放进去
-        //
-        // });
-    }
+//后台——删除文章
+function deleteMes(e){
+    var questionid=e.getAttribute("data-id");
+    // console.log(questionid);
+    $.get(
+       "/deleteMsg",{id:questionid},function(data){
+           if(data=="success"){
+               window.location.reload();
+           }
+        }
+    )
+}
+
+
+//后台——删除用户
+function deleteuser(e){
+    var userid=e.getAttribute("data-id");
+    console.log(userid);
+    $.get(
+        "/deleteUser",{id:userid},function(data){
+            if(data=="success"){
+                window.location.reload();
+            }
+        }
+    )
+}
+
+//后台——禁用用户
+function disableuser(e) {
+    var userid=e.getAttribute("data-id");
+    console.log(userid);
+    $.get(
+        "/disableuser",{id:userid},function(data){
+            if(data=="success"){
+                window.location.reload();
+            }
+        }
+    )
+}
+
+//后台——解禁用户
+function ableuser(e) {
+    var userid=e.getAttribute("data-id");
+    console.log(userid);
+    $.get(
+        "/ableuser",{id:userid},function(data){
+            if(data=="success"){
+                window.location.reload();
+            }
+        }
+    )
+}
+
+//后台——删除评论
+function delCom(e){
+    var comid = e.getAttribute("data-id");
+    console.log(comid);
+    $.get(
+        "/delCom",{id:comid},function(data){
+            if(data=="success"){
+                window.location.reload();
+            }
+        }
+    )
 }
 
 

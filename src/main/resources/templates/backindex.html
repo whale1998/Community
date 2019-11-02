@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+    <link rel="stylesheet" href="css/orionicons.css">
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/pet.css" rel="stylesheet">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.js" type="application/javascript"></script>
+    <link rel="shortcut icon" href="img/favicon.png?3">
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="/js/pet.js"></script>
+
+
+    <script type="text/javascript">
+        <!--        后端传来的值进行转义-->
+        $(function () {
+            var content = $("#questionTitle").val();
+            $(".showHtml").html(content);
+        });
+    </script>
+</head>
+<body>
+
+<!-- 左边列 -->
+<div class="d-flex align-items-stretch">
+    <div id="sidebar" class="sidebar py-3" style="width: 200px;">
+        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN
+        </div>
+        <ul class="sidebar-menu list-unstyled">
+            <li class="sidebar-list-item"><a href="/back" class="sidebar-link text-muted active"><i
+                    class="o-home-1 mr-3 text-gray"></i><span>帖文详情管理</span></a></li>
+            <li class="sidebar-list-item"><a href="/backuser" class="sidebar-link text-muted"><i
+                    class="o-sales-up-1 mr-3 text-gray"></i><span>用户信息管理</span></a></li>
+            <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i
+                    class="o-table-content-1 mr-3 text-gray"></i><span>标签管理</span></a></li>
+        </ul>
+    </div>
+
+    <!--        内容-->
+    <div class="container-fluid main" style="width: 1000px;">
+        <!--            <div class="row">-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 帖文列表</h2>
+            <hr>
+
+            <div class="media" th:each="question : ${pagination.data}">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded"
+                             th:src="${question.user.avatarUrl}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a th:href="@{'/question/'+ ${question.id}}" th:text="${question.title}"></a>　　
+                        <button type="button" class="btn btn-danger" th:data-id="${question.id}" onclick="deleteMes(e);">删除
+                        </button>
+                    </h4>
+                    <br>
+                    <span class="text-desc"><span th:text="${question.commentCount}"></span> 个回复 • <span
+                            th:text="${question.viewCount}"></span> 次浏览 • <span
+                            th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
+                </div>
+            </div>
+
+
+            <!--                    页数-->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li th:if="${pagination.showFirstPage}">
+                        <a href="/?page=1" aria-label="Previous">
+                            <span aria-hidden="true">&lt;&lt;</span>
+                        </a>
+                    </li>
+                    <li th:if="${pagination.showPrevious}">
+                        <a th:href="@{/back(page=${pagination.page - 1})}" aria-label="Previous">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+
+                    <li th:each="page : ${pagination.pages}" th:class="${pagination.page == page}? 'active' : ''">
+                        <a th:href="@{/back(page=${page})}" th:text="${page}"></a>
+                    </li>
+
+                    <li th:if="${pagination.showNext}">
+                        <a th:href="@{/back(page=${pagination.page + 1 })}" aria-label="Previous">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+                    <li th:if="${pagination.showEndPage}">
+                        <a th:href="@{/back(page=${pagination.totalpage})}" aria-label="Previous">
+                            <span aria-hidden="true">&gt;&gt;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--                </div>-->
+    </div>
+</div>
+
+
+</div>
+
+</body>
+</html>

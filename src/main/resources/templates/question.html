@@ -108,6 +108,7 @@
                                     <!-- 评论数 !!!!!!!-->
                                     <span th:text="${comment.commentCount}"></span>
                                 </span>
+                                <span  th:if="${root == 'root'}" onclick="delCom(this);" th:data-id="${comment.id}" >删除</span>
                                 <span class="pull-right"
                                       th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>
                             </div>
