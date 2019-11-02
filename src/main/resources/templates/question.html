@@ -27,7 +27,7 @@
     </script>
     <script src="../static/js/moment.js"></script>
 </head>
-<body background="/img/background.jpg">
+<body background="/img/background.jpg" style="background-size: cover">
 <!--导入模板 -->
 <div th:insert="~{navgation :: copy}"></div>
 
@@ -56,7 +56,7 @@
                     });
                 </script>
 
-                <!--标签-->s
+                <!--标签-->
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <span class="label label-info question-tag" th:each="tag : ${question.tag.split(',')}">

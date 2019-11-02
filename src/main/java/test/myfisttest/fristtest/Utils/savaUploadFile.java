@@ -34,9 +34,9 @@ public class savaUploadFile {
         example.createCriteria()
                 .andIdEqualTo(id);
         int i = userMapper.updateByExampleSelective(uplocalFileEntity, example);
-        System.out.println("插入了"  + i + "数据");
+//        System.out.println("插入了"  + i + "数据");
 
-        System.out.println("uplocalFileEntity.getProfilePhoto():" + uplocalFileEntity.getAvatarUrl());
+//        System.out.println("uplocalFileEntity.getProfilePhoto():" + uplocalFileEntity.getAvatarUrl());
         return uplocalFileEntity.getAvatarUrl();
     }
 }

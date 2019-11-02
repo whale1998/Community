@@ -34,18 +34,12 @@ public class QuestionService {
 
 
 //    更新发布问题
-    public Question createOrUpdate(Question question) {
+    public void createOrUpdate(Question question) {
         if(question.getId()==null){
             //插入
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
             questionmapper.insert(question);
-            QuestionExample example = new QuestionExample();
-            example.createCriteria()
-                    .andGmtCreateEqualTo(question.getGmtCreate());
-            List<Question> questions = questionmapper.selectByExample(example);
-            Question onesure = questionmapper.selectByPrimaryKey(questions.get(0).getId());
-            return onesure;
         }else{
             //更新
             question.setGmtModified(System.currentTimeMillis());
@@ -61,7 +55,6 @@ public class QuestionService {
             if(update != 1){
                 throw new RuntimeError(ErrorCode.QUESTION_NOT_FOUND);
             }
-           return  questionmapper.selectByPrimaryKey(question.getId());
         }
     }
 

@@ -81,7 +81,7 @@ function collapseComments(e) {
             e.classList.add("active");
         } else {
             $.getJSON("/comment/" + id, function (data) {
-                console.log(data);
+                // console.log(data);
                 $.each(data.date.reverse(), function (index, comment) {
                     var mediaLeftElement = $("<div/>", {
                         "class": "media-left"
@@ -151,8 +151,9 @@ function changecolor() {
     var id = $("#commentid").val();
     if (id != null && id != 0) {
         $.post("/likecount", {yeses: yeses, id: id}, function (data) {
+            //收到数据
             var d = eval("(" + data + ")");
-            console.log(d);
+            // console.log(d);
             $("#commentLikeCount").empty();
             $("#commentLikeCount").append(data);
         })

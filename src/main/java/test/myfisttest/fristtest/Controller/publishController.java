@@ -99,22 +99,8 @@ public class publishController {
         question.setCommentCount(0);
         question.setViewCount(0);
         question.setLikeCount(0);
-        Question newquestion = questionService.createOrUpdate(question);
-//        将问题存入索引库
-//        Document document = LuceneUtils.javaBean2Document(newquestion);
-        /**
-         * IndexWriter将我们的document对象写到硬盘中
-         *
-         * 参数一：Directory d,写到硬盘中的目录路径是什么
-         * 参数二：Analyzer a, 以何种算法来对document中的原始记录表数据进行拆分成词汇表
-         * 参数三：MaxFieldLength mfl 最多将文本拆分出多少个词汇
-         *
-         * */
-//        IndexWriter indexWriter = new IndexWriter(LuceneUtils.getDirectory(), LuceneUtils.getAnalyzer(), LuceneUtils.getMaxFieldLength());
-//        //将Document对象通过IndexWriter对象写入索引库中
-//        indexWriter.addDocument(document);
-//        //关闭IndexWriter对象
-//        indexWriter.close();
+        questionService.createOrUpdate(question);
+
         return "redirect:/index";
     }
 }

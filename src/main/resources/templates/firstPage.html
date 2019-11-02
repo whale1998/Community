@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>收容社区</title>
+
     <link    href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.css" rel="stylesheet">
     <link href="/css/pet.css" rel="stylesheet">
@@ -15,10 +16,13 @@
             $(".showHtml").html(content);
         });
     </script>
+
+    <div th:insert="~{navgation :: copy}"></div>
+
 </head>
-<body background="/img/background.jpg">
+<body background="/img/background.jpg" style="background-size: cover">
 <!--导入模板 -->
-<div th:insert="~{navgation :: copy}"></div>
+
 
 <div class="container-fluid main">
     <div class="row">
@@ -133,6 +137,12 @@
         </div>
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" >
+            <h3>温馨提醒</h3>
+            <span style="line-height: 37px"> • 保护好自己的隐私</span></br>
+            <span style="line-height: 37px"> • 诚信可贵，欺人可耻</span></br>
+            <span style="line-height: 37px"> • 防人之心不可无</span></br>
+            <span style="line-height: 37px"> • 一切损失，本站不负责</span></br>
+            <hr>
             <h4>热门标签</h4>
             <ul class="question-related">
                 <li th:each="tag : ${tags}"  style="line-height: 25px;">

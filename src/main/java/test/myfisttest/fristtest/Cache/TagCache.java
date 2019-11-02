@@ -14,15 +14,15 @@ public class TagCache {
 
         TagDTO location = new TagDTO();
         location.setTagname("地理位置");
-        location.setTags(Arrays.asList("广东","北京","增城"));
+        location.setTags(Arrays.asList("广东","北京","增城","揭阳","榕城","汕头","潮汕","湖南","深圳"));
 
         TagDTO pet = new TagDTO();
         pet.setTagname("动物种类");
-        pet.setTags(Arrays.asList("猫","狗","仓鼠"));
+        pet.setTags(Arrays.asList("猫","狗","仓鼠","龙猫","宠物蛇"));
 
         TagDTO type = new TagDTO();
         type.setTagname("问题类型");
-        type.setTags(Arrays.asList("求收留","找伴丫","小妙招"));
+        type.setTags(Arrays.asList("求收留","找伴丫","小妙招","经验分享","闲来一言"));
 
         tagDTOS.add(location);
         tagDTOS.add(pet);
